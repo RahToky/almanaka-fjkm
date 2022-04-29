@@ -1,6 +1,6 @@
 package mg.fjkm.Almanaka.controllers;
 
-import mg.fjkm.Almanaka.display.helpers.MenuHelper;
+import mg.fjkm.Almanaka.display.helpers.DisplayHelper;
 import mg.fjkm.Almanaka.display.models.Menu;
 import mg.fjkm.Almanaka.display.models.MenuItem;
 import mg.fjkm.Almanaka.models.Csv;
@@ -38,7 +38,7 @@ public class HomeController {
     @GetMapping("")
     public String index(Model model) {
         CSV_LIST = csvService.getAllCsv();
-        MENU = MenuHelper.toMenu(CSV_LIST);
+        MENU = DisplayHelper.toMenu(CSV_LIST);
         addMenu(model);
         return "index";
     }
@@ -48,15 +48,35 @@ public class HomeController {
         try {
             Optional<MenuItem> menuItem = MENU.getMenuItems().stream().filter(item -> item.getHref().equals(csvHref)).findFirst();
             if (!menuItem.isPresent())
-                return "index";
-            Csv csv = MenuHelper.extractCsv(CSV_LIST, menuItem.get());
+                return "redirect:/";
+            Csv csv = DisplayHelper.extractCsv(CSV_LIST, menuItem.get());
             addMenu(model);
+            model.addAttribute("csvHref", csvHref);
             model.addAttribute("csv", csv);
         } catch (Exception e) {
             System.err.println("ERROR toListPage ::" + e.getMessage());
             e.printStackTrace();
         }
         return "list";
+    }
+
+    @GetMapping("{csvHref}/add")
+    public String addNewLine(@PathVariable(name = "csvHref") String csvHref, Model model) {
+        try {
+            Optional<MenuItem> menuItem = MENU.getMenuItems().stream().filter(item -> item.getHref().equals(csvHref)).findFirst();
+            if (!menuItem.isPresent())
+                return "redirect:/";
+            Csv csv = DisplayHelper.extractCsv(CSV_LIST, menuItem.get());
+            addMenu(model);
+            model.addAttribute("csvHref", csvHref);
+            model.addAttribute("csvHeaders", csv.getHeaders());
+            model.addAttribute("csvTitle", csv.getTitle());
+            model.addAttribute("csvForm", DisplayHelper.createCsvForm(csv));
+        } catch (Exception e) {
+            System.err.println("ERROR toListPage ::" + e.getMessage());
+            e.printStackTrace();
+        }
+        return "form_csv";
     }
 
 }

@@ -28,7 +28,7 @@
                             <div class="card-header">
                                 <h2 class="card-title text-info" th:text="${#strings.capitalize(csv.title)}"></h2>
                                 <div class="card-tools">
-                                    <a type="button" class="btn btn-sm btn-success" href="#" th:href="@{/}"><i
+                                    <a type="button" class="btn btn-sm btn-success" href="#" th:href='@{${csvHref+"/add"}}'><i
                                             class="fa fa-plus"></i> Hanampy</a>
                                 </div>
                             </div>
@@ -38,8 +38,7 @@
                                     <table id="example2" class="table table-bordered table-hover" th:case="${false}">
                                         <thead>
                                         <tr>
-                                            <th th:each="head:${csv.headers}"><span
-                                                    th:text="${T(mg.fjkm.Almanaka.display.helpers.MenuHelper).getFieldName(head)}"></span>
+                                            <th th:each="head:${csv.headers}"><span th:text="${T(mg.fjkm.Almanaka.display.helpers.DisplayHelper).getFieldName(head)}"></span>
                                             </th>
                                         </tr>
                                         </thead>

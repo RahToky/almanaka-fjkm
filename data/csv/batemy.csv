@@ -1,3 +1,3 @@
-Anarana:s;Daty:D;Taona:i;Vola:d
+Anarana:String;Daty:LocalDate;Taona:Integer;Vola:Double;Mombamomba:TextArea
 Fitiavana;12-10-2022;7;152.6
 Mahefa;12-10-2022;2;456.8
