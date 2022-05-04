@@ -21,27 +21,33 @@
         <section class="content">
             <div class="container-fluid">
 
-                <form action="#" th:action='@{${csvHref}+"/add"}' th:object="${csvForm}" method="post">
+                <form action="#" th:action="@{'/'+${csvHref}}" th:object="${csvForm}" method="post">
                     <div class="row">
                         <div class="col-12">
                             <div class="card card-primary">
                                 <div class="card-header">
-                                    <h3 class="card-title">Hanampy <span th:text="${#strings.capitalize(csvTitle)}"></span></h3>
+                                    <h3 class="card-title">Hanampy <span
+                                            th:text="${#strings.capitalize(csvTitle)}"></span></h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
                                 <div class="card-body">
 
                                     <div class="form-group" th:each="field,itemStat:*{fields}">
-                                        <label th:for="*{fields[__${itemStat.index}__].name}" th:text="*{fields[__${itemStat.index}__].name}"></label>
-                                        <span th:switch="${ fields[__${itemStat.index}__].htmlType == 'textarea' }">
-                                            <span th:case="${false}">
-                                                <input type="text" th:id="*{fields[__${itemStat.index}__].name}" class="form-control" placeholder="" th:field="*{fields[__${itemStat.index}__].value}" th:type="*{fields[__${itemStat.index}__].htmlType}">
+                                        <input type="hidden" th:name="*{fields[__${itemStat.index}__].name}" th:field="*{fields[__${itemStat.index}__].name}" th:value="*{fields[__${itemStat.index}__].name}"/>
+                                        <label th:for="*{fields[__${itemStat.index}__].name}"
+                                               th:text="*{fields[__${itemStat.index}__].name}"></label>
+                                        <span th:if='*{fields[__${itemStat.index}__].htmlType != "textarea"}'>
+                                                <input type="text" th:id="*{fields[__${itemStat.index}__].name}"
+                                                       class="form-control" placeholder=""
+                                                       th:field="*{fields[__${itemStat.index}__].value}"
+                                                       th:type="*{fields[__${itemStat.index}__].htmlType}">
                                             </span>
-                                            <span th:case="${true}">
-                                                <textarea th:id="*{fields[__${itemStat.index}__].name}" class="form-control" placeholder="" th:field="*{fields[__${itemStat.index}__].value}"></textarea>
+                                        <span th:if='*{fields[__${itemStat.index}__].htmlType == "textarea"}'>
+                                                <textarea th:id="*{fields[__${itemStat.index}__].name}"
+                                                          class="form-control" placeholder=""
+                                                          th:field="*{fields[__${itemStat.index}__].value}"></textarea>
                                             </span>
-                                        </span>
                                     </div>
 
                                     <!--
@@ -125,7 +131,6 @@
                         </div>
                     </div>
                 </form>
-
 
 
             </div><!-- /.container-fluid -->

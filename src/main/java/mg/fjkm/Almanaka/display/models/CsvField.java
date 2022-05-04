@@ -15,6 +15,6 @@ public class CsvField {
     private Object value;
     private Class clazz;
     @Setter(AccessLevel.NONE)
-    private String htmlType;
+    private String htmlType = "text";
 
 }
