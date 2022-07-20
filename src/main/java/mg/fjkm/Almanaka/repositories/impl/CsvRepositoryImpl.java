@@ -1,6 +1,6 @@
 package mg.fjkm.Almanaka.repositories.impl;
 
-import mg.fjkm.Almanaka.models.Csv;
+import mg.fjkm.Almanaka.models.entity.Csv;
 import mg.fjkm.Almanaka.repositories.CsvRepository;
 import org.springframework.stereotype.Component;
 

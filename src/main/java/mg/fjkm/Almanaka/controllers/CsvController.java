@@ -1,10 +1,10 @@
 package mg.fjkm.Almanaka.controllers;
 
-import mg.fjkm.Almanaka.display.helpers.DisplayHelper;
-import mg.fjkm.Almanaka.display.models.CsvForm;
-import mg.fjkm.Almanaka.display.models.Menu;
-import mg.fjkm.Almanaka.display.models.MenuItem;
-import mg.fjkm.Almanaka.models.Csv;
+import mg.fjkm.Almanaka.helpers.CsvHelper;
+import mg.fjkm.Almanaka.models.display.CsvForm;
+import mg.fjkm.Almanaka.models.display.Menu;
+import mg.fjkm.Almanaka.models.display.MenuItem;
+import mg.fjkm.Almanaka.models.entity.Csv;
 import mg.fjkm.Almanaka.services.CsvService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +20,7 @@ import java.util.Optional;
  */
 @Controller
 @RequestMapping("/")
-public class HomeController {
+public class CsvController {
 
     @Autowired
     private CsvService csvService;
@@ -37,7 +37,7 @@ public class HomeController {
     @GetMapping("")
     public String index(Model model) {
         CSV_LIST = csvService.getAllCsv();
-        MENU = DisplayHelper.toMenu(CSV_LIST);
+        MENU = CsvHelper.toMenu(CSV_LIST);
         addMenu(model);
         return "index";
     }
@@ -48,7 +48,7 @@ public class HomeController {
             Optional<MenuItem> menuItem = MENU.getMenuItems().stream().filter(item -> item.getHref().equals(csvHref)).findFirst();
             if (!menuItem.isPresent() || CSV_LIST == null)
                 return "redirect:/";
-            Csv csv = DisplayHelper.extractCsv(CSV_LIST, menuItem.get());
+            Csv csv = CsvHelper.extractCsv(CSV_LIST, menuItem.get());
             addMenu(model);
             model.addAttribute("csvHref", csvHref);
             model.addAttribute("csv", csv);
@@ -65,12 +65,12 @@ public class HomeController {
             Optional<MenuItem> menuItem = MENU.getMenuItems().stream().filter(item -> item.getHref().equals(csvHref)).findFirst();
             if (!menuItem.isPresent() || CSV_LIST == null)
                 return "redirect:/";
-            Csv csv = DisplayHelper.extractCsv(CSV_LIST, menuItem.get());
+            Csv csv = CsvHelper.extractCsv(CSV_LIST, menuItem.get());
             addMenu(model);
             model.addAttribute("csvHref", csvHref);
             model.addAttribute("csvHeaders", csv.getHeaders());
             model.addAttribute("csvTitle", csv.getTitle());
-            model.addAttribute("csvForm", DisplayHelper.createCsvForm(csv));
+            model.addAttribute("csvForm", CsvHelper.toCsvForm(csv));
         } catch (Exception e) {
             System.err.println("ERROR addNewLine ::" + e.getMessage());
             e.printStackTrace();
@@ -84,7 +84,7 @@ public class HomeController {
             Optional<MenuItem> menuItem = MENU.getMenuItems().stream().filter(item -> item.getHref().equals(csvHref)).findFirst();
             if (!menuItem.isPresent() || CSV_LIST == null)
                 return "redirect:/";
-            Csv csv = DisplayHelper.extractCsv(CSV_LIST, menuItem.get());
+            Csv csv = CsvHelper.extractCsv(CSV_LIST, menuItem.get());
             System.out.println(csvForm);
             return "redirect:/" + csvHref;
         } catch (Exception e) {

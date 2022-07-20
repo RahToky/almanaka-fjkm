@@ -1,4 +1,4 @@
-package mg.fjkm.Almanaka.models;
+package mg.fjkm.Almanaka.models.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

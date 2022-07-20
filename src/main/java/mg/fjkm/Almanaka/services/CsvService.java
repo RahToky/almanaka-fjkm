@@ -1,6 +1,6 @@
 package mg.fjkm.Almanaka.services;
 
-import mg.fjkm.Almanaka.models.Csv;
+import mg.fjkm.Almanaka.models.entity.Csv;
 
 import java.util.List;
 

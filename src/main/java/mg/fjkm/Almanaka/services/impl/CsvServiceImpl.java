@@ -1,6 +1,6 @@
 package mg.fjkm.Almanaka.services.impl;
 
-import mg.fjkm.Almanaka.models.Csv;
+import mg.fjkm.Almanaka.models.entity.Csv;
 import mg.fjkm.Almanaka.repositories.CsvRepository;
 import mg.fjkm.Almanaka.services.CsvService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package mg.fjkm.Almanaka.display.models;
+package mg.fjkm.Almanaka.models.display;
 
 import lombok.*;
 
