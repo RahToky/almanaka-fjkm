@@ -72,23 +72,23 @@ public class HomeController {
             model.addAttribute("csvTitle", csv.getTitle());
             model.addAttribute("csvForm", DisplayHelper.createCsvForm(csv));
         } catch (Exception e) {
-            System.err.println("ERROR toListPage ::" + e.getMessage());
+            System.err.println("ERROR addNewLine ::" + e.getMessage());
             e.printStackTrace();
         }
         return "form_csv";
     }
 
     @PostMapping("{csvHref}")
-    public String addNewLineConfirm(@PathVariable(name = "csvHref") String csvHref, @ModelAttribute CsvForm csvForm, Model model) {
+    public String addNewLineConfirm(@PathVariable(name = "csvHref") String csvHref, @ModelAttribute CsvForm csvForm) {
         try {
             Optional<MenuItem> menuItem = MENU.getMenuItems().stream().filter(item -> item.getHref().equals(csvHref)).findFirst();
             if (!menuItem.isPresent() || CSV_LIST == null)
                 return "redirect:/";
             Csv csv = DisplayHelper.extractCsv(CSV_LIST, menuItem.get());
-            System.out.println("csvForm: " + csvForm);
+            System.out.println(csvForm);
             return "redirect:/" + csvHref;
         } catch (Exception e) {
-            System.err.println("ERROR toListPage ::" + e.getMessage());
+            System.err.println("ERROR addNewLineConfirm ::" + e.getMessage());
             e.printStackTrace();
         }
         return "form_csv";

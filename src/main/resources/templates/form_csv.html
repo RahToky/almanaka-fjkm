@@ -34,20 +34,34 @@
                                 <div class="card-body">
 
                                     <div class="form-group" th:each="field,itemStat:*{fields}">
-                                        <input type="hidden" th:name="*{fields[__${itemStat.index}__].name}" th:field="*{fields[__${itemStat.index}__].name}" th:value="*{fields[__${itemStat.index}__].name}"/>
+
+                                        <input type="hidden" th:id="*{fields[__${itemStat.index}__].clazzStr}"
+                                               class="form-control"
+                                               th:field="*{fields[__${itemStat.index}__].clazzStr}">
+
+                                        <input type="hidden" th:id="*{fields[__${itemStat.index}__].name}"
+                                               class="form-control"
+                                               th:field="*{fields[__${itemStat.index}__].name}">
+
                                         <label th:for="*{fields[__${itemStat.index}__].name}"
                                                th:text="*{fields[__${itemStat.index}__].name}"></label>
+
                                         <span th:if='*{fields[__${itemStat.index}__].htmlType != "textarea"}'>
-                                                <input type="text" th:id="*{fields[__${itemStat.index}__].name}"
+                                                <input type="text"
                                                        class="form-control" placeholder=""
+                                                       th:id="*{fields[__${itemStat.index}__].name}"
                                                        th:field="*{fields[__${itemStat.index}__].value}"
                                                        th:type="*{fields[__${itemStat.index}__].htmlType}">
-                                            </span>
+                                        </span>
+
                                         <span th:if='*{fields[__${itemStat.index}__].htmlType == "textarea"}'>
-                                                <textarea th:id="*{fields[__${itemStat.index}__].name}"
-                                                          class="form-control" placeholder=""
-                                                          th:field="*{fields[__${itemStat.index}__].value}"></textarea>
-                                            </span>
+                                                <textarea
+                                                        class="form-control" placeholder=""
+                                                        th:id="*{fields[__${itemStat.index}__].name}"
+                                                        th:field="*{fields[__${itemStat.index}__].value}">
+                                                </textarea>
+                                        </span>
+
                                     </div>
 
                                     <!--

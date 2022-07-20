@@ -35,6 +35,7 @@ public abstract class DisplayHelper {
         FIELD_CLASS.put("Double", Double.class);
         FIELD_CLASS.put("Integer", Integer.class);
         FIELD_CLASS.put("TextArea", String.class);
+        FIELD_CLASS.put("String", String.class);
     }
 
     public static Menu toMenu(List<Csv> csvList) {
@@ -73,18 +74,22 @@ public abstract class DisplayHelper {
     public static CsvForm createCsvForm(Csv csv) {
         CsvField[] csvFields = new CsvField[csv.getHeaders().length];
         for (int i = 0; i < csvFields.length; i++) {
-            String[] headerSplited = csv.getHeaders()[i].split(":");
+            String[] headerSplit = csv.getHeaders()[i].split(":");
             Class clazz = String.class;
             try {
-                FIELD_CLASS.get(headerSplited[1]);
+                clazz = FIELD_CLASS.get(headerSplit[1]);
+                if (clazz == null)
+                    clazz = String.class;
             } catch (Exception e) {
             }
             String htmlType = "text";
             try {
-                htmlType = FIELD_HTML_TYPE.get(headerSplited[1]);
+                htmlType = FIELD_HTML_TYPE.get(headerSplit[1]);
+                if (htmlType == null)
+                    htmlType = "text";
             } catch (Exception e) {
             }
-            csvFields[i] = new CsvField(headerSplited[0], null, clazz, htmlType);
+            csvFields[i] = new CsvField(headerSplit[0], null, clazz, clazz.getCanonicalName(), htmlType);
         }
         return new CsvForm(csvFields);
     }
