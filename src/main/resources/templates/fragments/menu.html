@@ -19,9 +19,9 @@
                     <p>Hanampy Seho</p>
                 </a>
             </li>
-            <div th:if="${menu != null && !menu.menuItems.isEmpty}">
-                <li class="nav-item" th:each="menuItem:${menu.menuItems}">
-                    <a href="#" th:href="@{'/'+${menuItem.href}}" class="nav-link">
+            <div th:if="${@csvController.menu != null && !@csvController.menu.menuItems.isEmpty}">
+                <li class="nav-item" th:each="menuItem:${@csvController.menu.menuItems}">
+                    <a href="#" th:href="@{'/almanaka/'+${menuItem.href}}" class="nav-link">
                         <i class="nav-icon far fa-circle"></i>
                         <p>
                             <span th:text="${#strings.capitalize(#strings.abbreviate(menuItem.label,22))}"></span>
