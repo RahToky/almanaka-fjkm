@@ -6,6 +6,8 @@ import lombok.ToString;
 import mg.fjkm.Almanaka.cache.Const;
 import mg.fjkm.Almanaka.models.entity.Csv;
 
+import java.util.Locale;
+
 @Data
 @AllArgsConstructor
 @ToString
@@ -23,14 +25,14 @@ public class    CsvForm {
             String[] headerSplit = csv.getHeaders()[i].split(":");
             Class clazz = String.class;
             try {
-                clazz = Const.FIELD_CLASS.get(headerSplit[1]);
+                clazz = Const.FIELD_CLASS.get(headerSplit[1].toLowerCase());
                 if (clazz == null)
                     clazz = String.class;
             } catch (Exception e) {
             }
             String htmlType = "text";
             try {
-                htmlType = Const.FIELD_HTML_TYPE.get(headerSplit[1]);
+                htmlType = Const.FIELD_HTML_TYPE.get(headerSplit[1].toLowerCase());
                 if (htmlType == null)
                     htmlType = "text";
             } catch (Exception e) {

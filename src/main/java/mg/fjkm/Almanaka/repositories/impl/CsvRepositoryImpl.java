@@ -7,6 +7,8 @@ import mg.fjkm.Almanaka.repositories.CsvRepository;
 import org.springframework.stereotype.Component;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,9 +65,11 @@ public class CsvRepositoryImpl implements CsvRepository {
 
     @Override
     public void saveCsvLine(String filename, String line) throws IOException {
-        BufferedWriter writer = new BufferedWriter(new FileWriter(CSV_DIR + "/" + filename, true));
-        writer.newLine();
-        writer.append(line);
-        writer.close();
+        if (Files.exists(Paths.get(filename))) {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(CSV_DIR + "/" + filename, true));
+            writer.newLine();
+            writer.append(line);
+            writer.close();
+        }
     }
 }

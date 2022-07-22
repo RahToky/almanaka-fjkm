@@ -13,18 +13,18 @@ public abstract class Const {
     public static HashMap<String, Class> FIELD_CLASS = new HashMap<>();
 
     static {
-        FIELD_HTML_TYPE.put("LocalDate", "date");
-        FIELD_HTML_TYPE.put("LocalDateTime", "date");
-        FIELD_HTML_TYPE.put("Double", "number");
-        FIELD_HTML_TYPE.put("Integer", "number");
-        FIELD_HTML_TYPE.put("TextArea", "textarea");
+        FIELD_HTML_TYPE.put("localdate", "date");
+        FIELD_HTML_TYPE.put("localdatetime", "date");
+        FIELD_HTML_TYPE.put("double", "number");
+        FIELD_HTML_TYPE.put("integer", "number");
+        FIELD_HTML_TYPE.put("textarea", "textarea");
 
-        FIELD_CLASS.put("LocalDate", LocalDate.class);
-        FIELD_CLASS.put("LocalDateTime", LocalDateTime.class);
-        FIELD_CLASS.put("Double", Double.class);
-        FIELD_CLASS.put("Integer", Integer.class);
-        FIELD_CLASS.put("TextArea", String.class);
-        FIELD_CLASS.put("String", String.class);
+        FIELD_CLASS.put("localdate", LocalDate.class);
+        FIELD_CLASS.put("localdatetime", LocalDateTime.class);
+        FIELD_CLASS.put("double", Double.class);
+        FIELD_CLASS.put("integer", Integer.class);
+        FIELD_CLASS.put("textarea", String.class);
+        FIELD_CLASS.put("string", String.class);
     }
 
 }
