@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 public abstract class Const {
 
+    public static final String CSV_DIR = "./data/csv";
     public static final String FIELD_SEPARATOR = ":";
 
     public static HashMap<String, String> FIELD_HTML_TYPE = new HashMap<>();
