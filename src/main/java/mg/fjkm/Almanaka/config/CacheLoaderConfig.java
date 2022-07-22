@@ -2,7 +2,7 @@ package mg.fjkm.Almanaka.config;
 
 import mg.fjkm.Almanaka.cache.CsvCache;
 import mg.fjkm.Almanaka.models.display.Menu;
-import mg.fjkm.Almanaka.services.CsvService;
+import mg.fjkm.Almanaka.repositories.CsvRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -12,9 +12,9 @@ import org.springframework.context.annotation.Configuration;
 public class CacheLoaderConfig {
 
     @Bean
-    public CsvCache csvCache(CsvService csvService) {
+    public CsvCache csvCache(CsvRepository csvRepository) {
         CsvCache csvCache = new CsvCache();
-        csvCache.store(csvService.getAllCsv());
+        csvCache.set(csvRepository.getAllCsv());
         return csvCache;
     }
 

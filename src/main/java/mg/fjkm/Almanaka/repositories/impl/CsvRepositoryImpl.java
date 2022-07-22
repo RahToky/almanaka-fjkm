@@ -63,7 +63,7 @@ public class CsvRepositoryImpl implements CsvRepository {
 
     @Override
     public void saveCsvLine(String filename, String line) throws IOException {
-        BufferedWriter writer = new BufferedWriter(new FileWriter(filename, true));
+        BufferedWriter writer = new BufferedWriter(new FileWriter(CSV_DIR + "/" + filename, true));
         writer.newLine();
         writer.append(line);
         writer.close();

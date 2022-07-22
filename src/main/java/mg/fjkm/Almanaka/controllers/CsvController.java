@@ -1,7 +1,7 @@
 package mg.fjkm.Almanaka.controllers;
 
 import mg.fjkm.Almanaka.cache.CsvCache;
-import mg.fjkm.Almanaka.helpers.CsvHelper;
+import mg.fjkm.Almanaka.exception.SaveFailedException;
 import mg.fjkm.Almanaka.models.display.CsvForm;
 import mg.fjkm.Almanaka.models.display.Menu;
 import mg.fjkm.Almanaka.models.display.MenuItem;
@@ -11,9 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import javax.annotation.PostConstruct;
-import java.util.Optional;
 
 /**
  * @author Mahatoky
@@ -79,10 +76,9 @@ public class CsvController {
     @PostMapping("{csvHref}")
     public String addNewLineConfirm(@PathVariable(name = "csvHref") String csvHref, @ModelAttribute CsvForm csvForm) {
         try {
-            MenuItem menuItem = menu.getMenuItemByHref(csvHref);
-            Csv csv = csvCache.getCsvByFilename(menuItem.getFilename());
-            System.out.println(csvForm);
-        } catch (Exception e) {
+            csvService.saveCsvLine(csvForm);
+            csvCache.set(csvService.getAllCsv());
+        } catch (SaveFailedException e) {
             System.err.println("ERROR addNewLineConfirm ::" + e.getMessage());
             e.printStackTrace();
         }

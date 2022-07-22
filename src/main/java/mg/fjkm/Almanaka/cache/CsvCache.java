@@ -1,7 +1,6 @@
 package mg.fjkm.Almanaka.cache;
 
 import mg.fjkm.Almanaka.models.entity.Csv;
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +15,7 @@ public class CsvCache {
 
     private List<Csv> csvList = new ArrayList<>();
 
-    public void store(List<Csv> csvList) {
+    public void set(List<Csv> csvList) {
         this.csvList = csvList;
     }
 

@@ -42,13 +42,15 @@ public class CsvServiceImpl implements CsvService {
             StringBuilder stringBuilder = new StringBuilder();
             CsvField[] fields = csvForm.getFields();
             for (CsvField field : fields) {
-                stringBuilder.append(field.toString());
+                Object value = field.getValue();
+                stringBuilder.append(value == null ? "" : value.toString());
                 stringBuilder.append(";");
             }
 
             stringBuilder.deleteCharAt(stringBuilder.length() - 1);
             csvRepository.saveCsvLine(csvForm.getFilename(), stringBuilder.toString());
         } catch (IOException ioe) {
+            ioe.printStackTrace();
             throw new SaveFailedException(ioe.getMessage());
         }
     }
