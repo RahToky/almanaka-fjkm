@@ -9,13 +9,15 @@ import mg.fjkm.Almanaka.models.entity.Csv;
 @Data
 @AllArgsConstructor
 @ToString
-public class CsvForm {
+public class    CsvForm {
 
+    private String filename;
     private CsvField[] fields;
 
     public CsvForm(){}
 
     public CsvForm(Csv csv) {
+        this.filename = csv.getFilename();
         fields = new CsvField[csv.getHeaders().length];
         for (int i = 0; i < fields.length; i++) {
             String[] headerSplit = csv.getHeaders()[i].split(":");

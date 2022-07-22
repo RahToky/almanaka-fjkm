@@ -1,5 +1,6 @@
 package mg.fjkm.Almanaka.repositories;
 
+import mg.fjkm.Almanaka.models.display.CsvForm;
 import mg.fjkm.Almanaka.models.entity.Csv;
 
 import java.util.List;
@@ -10,5 +11,7 @@ import java.util.List;
 public interface CsvRepository {
 
      List<Csv> getAllCsv();
+
+     //void saveCsvLine(CsvForm csvForm);
 
 }

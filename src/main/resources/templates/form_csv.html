@@ -33,6 +33,10 @@
                                 <!-- form start -->
                                 <div class="card-body">
 
+                                    <input type="hidden" th:id="${csvForm.filename}"
+                                           class="form-control"
+                                           th:field="${csvForm.filename}">
+
                                     <div class="form-group" th:each="field,itemStat:*{fields}">
 
                                         <input type="hidden" th:id="*{fields[__${itemStat.index}__].clazzStr}"

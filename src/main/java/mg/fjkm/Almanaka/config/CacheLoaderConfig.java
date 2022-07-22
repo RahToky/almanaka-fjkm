@@ -9,11 +9,10 @@ import org.springframework.context.annotation.Configuration;
 
 @ComponentScan
 @Configuration
-public class CacheLoader {
+public class CacheLoaderConfig {
 
     @Bean
     public CsvCache csvCache(CsvService csvService) {
-        System.out.println(">>> init config");
         CsvCache csvCache = new CsvCache();
         csvCache.store(csvService.getAllCsv());
         return csvCache;
