@@ -14,6 +14,6 @@ public interface CsvRepository {
 
      List<Csv> getAllCsv();
 
-     void saveCsvLine(CsvForm csvForm) throws IOException, NullPointerException;
+     void saveCsvLine(String filename, String line) throws IOException;
 
 }
