@@ -44,7 +44,7 @@ public class CsvController {
             model.addAttribute("menu", menu);
             model.addAttribute("csvHref", csvHref);
             model.addAttribute("csv", csv);
-            return "list";
+            return "csv-list";
         } catch (Exception e) {
             System.err.println("ERROR toListPage ::" + e.getMessage());
             e.printStackTrace();
@@ -64,7 +64,7 @@ public class CsvController {
             model.addAttribute("csvHeaders", csv.getHeaders());
             model.addAttribute("csvTitle", csv.getTitle());
             model.addAttribute("csvForm", new CsvForm(csv));
-            return "form_csv";
+            return "form-csv-line";
         } catch (Exception e) {
             System.err.println("ERROR addNewLine ::" + e.getMessage());
             e.printStackTrace();
@@ -83,6 +83,11 @@ public class CsvController {
             e.printStackTrace();
         }
         return "redirect:/almanaka/" + csvHref;
+    }
+
+    @GetMapping("add")
+    public String showCsvForm(){
+        return "form-csv";
     }
 
 }
