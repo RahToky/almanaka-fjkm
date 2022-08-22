@@ -11,12 +11,13 @@ import java.util.Locale;
 @Data
 @AllArgsConstructor
 @ToString
-public class    CsvForm {
+public class CsvForm {
 
     private String filename;
     private CsvField[] fields;
 
-    public CsvForm(){}
+    public CsvForm() {
+    }
 
     public CsvForm(Csv csv) {
         this.filename = csv.getFilename();

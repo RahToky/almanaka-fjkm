@@ -65,11 +65,14 @@ public class CsvRepositoryImpl implements CsvRepository {
 
     @Override
     public void saveCsvLine(String filename, String line) throws IOException {
-        if (Files.exists(Paths.get(filename))) {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(CSV_DIR + "/" + filename, true));
+        String absoluteFilePath = CSV_DIR + "/" + filename;
+        if (Files.exists(Paths.get(absoluteFilePath))) {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(absoluteFilePath, true));
             writer.newLine();
             writer.append(line);
             writer.close();
+        } else {
+            System.err.println("Can't save line, cause:" + absoluteFilePath + " not exist!");
         }
     }
 }
