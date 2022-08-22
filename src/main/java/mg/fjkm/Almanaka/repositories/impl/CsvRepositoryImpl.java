@@ -75,4 +75,16 @@ public class CsvRepositoryImpl implements CsvRepository {
             System.err.println("Can't save line, cause:" + absoluteFilePath + " not exist!");
         }
     }
+
+    @Override
+    public void saveCsv(String filename, String header) throws IOException {
+        String absoluteFilePath = CSV_DIR + "/" + filename;
+        if (!Files.exists(Paths.get(absoluteFilePath))) {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(absoluteFilePath, true));
+            writer.append(header);
+            writer.close();
+        } else {
+            System.err.println("Can't create csv, cause:" + absoluteFilePath + " already exist!");
+        }
+    }
 }

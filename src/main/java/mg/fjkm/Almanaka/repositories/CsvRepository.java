@@ -16,4 +16,6 @@ public interface CsvRepository {
 
      void saveCsvLine(String filename, String line) throws IOException;
 
+     void saveCsv(String filename, String header) throws IOException;
+
 }
